@@ -1,0 +1,17 @@
+int diameterOfBinaryTree(TreeNode* root) {
+    int diameter = 0;
+    traverse(root, diameter);
+    return diameter;
+}
+
+// 返回：树的深度
+// diameter 使用引用类型，效果和全局变量相同
+int traverse(TreeNode* root, int& diameter) {
+    if (root == nullptr) {
+        return 0;
+    }
+    int left = traverse(root->left, diameter);
+    int right = traverse(root->right, diameter);
+    diameter = max(diameter, left + right);
+    return 1 + max(left, right);
+}
