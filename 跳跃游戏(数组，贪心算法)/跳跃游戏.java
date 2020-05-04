@@ -33,6 +33,7 @@ class Solution {
     }
 }
 //从前往后寻找跳跃距离最远的点
+//具体的实现中，我们维护当前能够到达的最大下标位置，记为边界。我们从左到右遍历数组，到达边界时，更新边界并将跳跃次数增加 1
 class Solution {
     public int jump(int[] nums) {
         int length = nums.length;
