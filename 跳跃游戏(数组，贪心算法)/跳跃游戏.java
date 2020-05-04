@@ -14,3 +14,38 @@ public class Solution {
         return false;
     }
 }
+//计算最短跳跃距离
+//从后往前选择距离最远的点，从头开始遍历
+class Solution {
+    public int jump(int[] nums) {
+        int position = nums.length - 1;
+        int steps = 0;
+        while (position > 0) {
+            for (int i = 0; i < position; i++) {
+                if (i + nums[i] >= position) {
+                    position = i;
+                    steps++;
+                    break;
+                }
+            }
+        }
+        return steps;
+    }
+}
+//从前往后寻找跳跃距离最远的点
+class Solution {
+    public int jump(int[] nums) {
+        int length = nums.length;
+        int end = 0;
+        int maxPosition = 0; 
+        int steps = 0;
+        for (int i = 0; i < length - 1; i++) {
+            maxPosition = Math.max(maxPosition, i + nums[i]); 
+            if (i == end) {
+                end = maxPosition;
+                steps++;
+            }
+        }
+        return steps;
+    }
+}
