@@ -1,5 +1,5 @@
 //用hashmap实现，时间复杂度为n 空间复杂度为n
-public int singleNumber(int[] nums) {
+public int singleNumber_0(int[] nums) {
         Map<Integer,Integer> map = new HashMap<>();
         for (Integer i : nums) {
             Integer count = map.get(i);
@@ -21,10 +21,38 @@ public int singleNumber(int[] nums) {
     3.异或运算满足交换律和结合律
     数组中的全部元素的异或运算结果即为数组中只出现一次的数字
     /*
-public int singleNumber(int[] nums) {
+public int singleNumber_1(int[] nums) {
     int single = 0;
     for (int num : nums) {
         single ^= num;
     }
     return single;
 }
+
+
+/*
+nor(异或)去掉出现偶数次的数字
+用两个标志位（seenTwice seenOnce）区分出现一次还是两次
+
+*/
+public int singleNumber_2(int[] nums) {
+    int seenOnce = 0, seenTwice = 0;
+
+    for (int num : nums) {
+      // first appearence: 
+      // add num to seen_once 
+      // don't add to seen_twice because of presence in seen_once
+
+      // second appearance: 
+      // remove num from seen_once 
+      // add num to seen_twice
+
+      // third appearance: 
+      // don't add to seen_once because of presence in seen_twice
+      // remove num from seen_twice
+      seenOnce = ~seenTwice & (seenOnce ^ num);
+      seenTwice = ~seenOnce & (seenTwice ^ num);
+    }
+
+    return seenOnce;
+  }
